@@ -1,0 +1,23 @@
+# Записать каждый файл на разную страницу(поищите самостоятельно как активировать или 
+# записывать данные в разные страницы в openpyxl) в один новый общий
+
+from openpyxl import load_workbook, Workbook
+from task1 import write_data_to_worksheet, parse_workbook
+
+if __name__ == '__main__':
+    workbook1 = load_workbook(filename='13_december/Книга1.xlsx')
+    workbook2 = load_workbook(filename='13_december/Книга2.xlsx')
+    workbook3 = load_workbook(filename='13_december/Книга3.xlsx')
+
+    workbook = Workbook()
+    workbook.active.title = 'List1'
+    
+    list1 = workbook.active
+    list2 = workbook.create_sheet('List2')
+    list3 = workbook.create_sheet('List3')
+    
+    write_data_to_worksheet(list1, parse_workbook(workbook1))
+    write_data_to_worksheet(list2, parse_workbook(workbook2))
+    write_data_to_worksheet(list3, parse_workbook(workbook3))
+
+    workbook.save('13_december/Result_2.xlsx')
